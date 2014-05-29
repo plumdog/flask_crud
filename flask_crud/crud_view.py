@@ -40,6 +40,7 @@ class CrudView(FlaskView):
     presenter = list
 
     db_session = None
+    addto_index_field = None
 
     methods = ['index', 'add', 'edit', 'show', 'delete']
 
@@ -89,7 +90,11 @@ class CrudView(FlaskView):
         form = self.form(request.form)
         if form.validate_on_submit():
             item = self.model()
-            item.save_form(form, session=self.db_session, extras={self.addto_index_field: id_})
+            if self.addto_index_field:
+                extras = {self.addto_index_field: id_}
+            else:
+                extras = {}
+            item.save_form(form, session=self.db_session, extras=extras)
             return redirect(self._success_redirect_url(item, 'addto'))
         return render_template(self._template_path(self.add_template), form=form, **self._addto_extras(id_))
 
