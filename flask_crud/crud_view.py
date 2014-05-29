@@ -91,7 +91,10 @@ class CrudView(FlaskView):
             item = self.model()
             item.save_form(form, session=self.db_session, extras={self.addto_index_field: id_})
             return redirect(self._success_redirect_url(item, 'addto'))
-        return render_template(self._template_path(self.add_template), form=form)
+        return render_template(self._template_path(self.add_template), form=form, **self._addto_extras(id_))
+
+    def _addto_extras(self, id_):
+        return {}
 
     @route('/show/<int:id_>')
     def show(self, id_):
