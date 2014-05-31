@@ -63,8 +63,8 @@ class CrudView(FlaskView):
         if 'index' not in self.methods:
             abort(404)
         items = self._index_items()
-        tab = self.presenter(items)
-        return render_template(self._template_path(self.index_template), table=tab, **self._index_extras(items))
+        items = self.presenter(items)
+        return render_template(self._template_path(self.index_template), items=items, **self._index_extras(items))
 
     def _index_items(self):
         return self.model.query.all()
