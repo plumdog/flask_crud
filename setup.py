@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name='Flask-Crud',
     packages=['flask_crud'],
-    version='0.0.1',
+    version='0.0.2',
     author='Andrew Plummer',
     author_email='plummer574@gmail.com',
     url='https://github.com/plumdog/flask_crud',
